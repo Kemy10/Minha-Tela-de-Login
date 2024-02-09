@@ -36,7 +36,7 @@
         </form>
 
         <div class="mt-3 text-center">
-            <a href="#">Esqueci a senha</a> | <a href="cadastro.php">Cadastrar Usuario</a>
+            <a href="./esqueci-senha.php">Esqueci a senha</a> | <a href="cadastro.php">Cadastrar Usuario</a>
         </div>
     </div>
 </body>

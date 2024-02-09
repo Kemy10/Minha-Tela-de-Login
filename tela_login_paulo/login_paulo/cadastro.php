@@ -7,10 +7,42 @@
     <link rel="stylesheet" href="css/cadastro.css">
     <title>Cadastro</title>
 </head>
+<?php
+if (isset($_GET['CODIGO'])){
+    $id=$_GET['CODIGO'];
+    require 'usuario-consultar.php';
+    $usuario = Listar1Usuario($id);
+    var_dump($usuario);
+} else{
+    $id= '';
+}
+
+// isset($_GET['CODIGO']) ? $id = $_GET['CODIGO'] : ''; Esse é o mesmo codigo de cima, mas é uma abreviação. Para coisas pequenas
+?>
+
 <body>
     <div class="container cadastro-container">
-        <h2 class="text-center mb-4" >Cadastro</h2>
-        <form method="POST" action="criar-cadastro.php">
+        <h2 class="text-center mb-4" >
+        <?php    
+        if($id != ''){
+            echo "Editar";
+        }  else{
+
+            echo "Cadastro";
+        }
+
+
+    ?>
+
+        <?php if ($id != '') { ?>
+        
+            <form method="POST" action="alterar-cadastro.php">
+                <input type="hidden" id= "id" name="id">
+
+        <?php } else {?>
+            <form method="POST" action="criar-cadastro.php">
+        <?php } ?>
+
            
             <div class="mt-1 form-group">
                 <label for="nome">Nome:</label>
@@ -24,12 +56,12 @@
 
             <div class="mt-1 form-group">
                 <label for="usuario">Usuario:</label>
-                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Digite o usuario" >
+                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Digite o usuario"  value="<?= $usuario['usuario'] ?>">
             </div>
 
             <div class="mt-1 form-group">
                 <label for="senha">Senha:</label>
-                <input type="text" class="form-control" id="senha" name="senha" placeholder="Digite a senha" >
+                <input type="text" class="form-control" id="senha" name="senha" placeholder="Digite a senha" value="<?= $usuario['senha'] ?>">
             </div>
 
             <div class="mt-2 text-center">
